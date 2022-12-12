@@ -38,7 +38,7 @@ const data = [
 
 const products = document.querySelector(".content__products");
 const searchInput = document.querySelector(".search");
-const categories = document.querySelector(".sidebar__categories");
+const categoriesDiv = document.querySelector(".sidebar__categories");
 const priceRange = document.querySelector(".price-range");
 const priceValue = document.querySelector(".price-value");
 
@@ -55,11 +55,27 @@ const displayProducts = (filteredProducts) => {
 displayProducts(data);
 
 searchInput.addEventListener("keyup", (e) => {
-   const searchingProduct = e.target.value.toLowerCase();
+    const searchingProduct = e.target.value.toLowerCase();
 
-   if (searchingProduct) {
-       displayProducts(data.filter(item => item.name.toLowerCase().indexOf(searchingProduct) !== -1));
-   } else {
-       displayProducts(data);
-   }
+    if (searchingProduct) {
+        displayProducts(data.filter(item => item.name.toLowerCase().indexOf(searchingProduct) !== -1));
+    } else {
+        displayProducts(data);
+    }
 });
+
+const setCategories = () => {
+    const allCategories = data.map(item => item.category);
+    const categories = [
+        "All",
+        ...allCategories.filter((item, i) => {
+            return allCategories.indexOf(item) === i;
+        }),
+    ];
+
+    categoriesDiv.innerHTML = categories.map(category => `
+        <div class="category">${category}</div>
+    `).join("");
+};
+
+setCategories();
