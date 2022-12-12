@@ -53,3 +53,13 @@ const displayProducts = (filteredProducts) => {
 };
 
 displayProducts(data);
+
+searchInput.addEventListener("keyup", (e) => {
+   const searchingProduct = e.target.value.toLowerCase();
+
+   if (searchingProduct) {
+       displayProducts(data.filter(item => item.name.toLowerCase().indexOf(searchingProduct) !== -1));
+   } else {
+       displayProducts(data);
+   }
+});
