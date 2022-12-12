@@ -76,6 +76,13 @@ const setCategories = () => {
     categoriesDiv.innerHTML = categories.map(category => `
         <div class="category">${category}</div>
     `).join("");
+
+    categoriesDiv.addEventListener("click", (e) => {
+        const selectedCategory = e.target.textContent;
+
+        selectedCategory === "All" ? displayProducts(data) : displayProducts(data.filter(item =>
+            item.category === selectedCategory));
+    });
 };
 
 setCategories();
